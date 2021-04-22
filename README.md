@@ -67,3 +67,4 @@ API de aluguel de carros
 - Não deve ser possível cadastrar um novo aluguel caso já exista um aluguel aberto para o mesmo usuário
 - Não deve ser possível cadastrar um novo aluguel caso já exista um aluguel aberto para o mesmo carro
 - Um usuário não cadastrado não poderá efetuar o aluguel de um carro
+- O usuário deve estar logado para cadastrar um aluguel
