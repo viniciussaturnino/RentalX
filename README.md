@@ -68,3 +68,19 @@ API de aluguel de carros
 - Não deve ser possível cadastrar um novo aluguel caso já exista um aluguel aberto para o mesmo carro
 - Um usuário não cadastrado não poderá efetuar o aluguel de um carro
 - O usuário deve estar logado para cadastrar um aluguel
+- Ao realizar um aliguel o status do carro deverá ser alterado para indisponível.
+
+## Devolução de carro
+
+**Requisitos Funcionais (RF's):**
+
+- Deve ser possível realizar a devolução de um carro
+
+**Regras de Negócio (RN's):**
+
+- Se o carro for devolvido com menos de 24h, deverá ser cobrado a diária completa.
+- Ao realizar a devolução, o carro deverá ser liberado para outro aluguel.
+- Ao realizar a devolução, o usuário deverá ser liberado para outro aluguel.
+- Ao realizar a devolução, deverá ser calculado o total do aluguel.
+- Caso o horário de devolução seja superior ao previsto de entrega, deverá ser cobrado multa proporcional aos dias de atraso.
+- Caso haja multa, deverá ser somado ao total do aluguel.
