@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { sign, verify } from 'jsonwebtoken';
 import { inject, injectable } from 'tsyringe';
 
@@ -11,6 +12,11 @@ interface IPayload {
   email: string;
 }
 
+interface ITokenResponse {
+  token: string;
+  refresh_token: string;
+}
+
 @injectable()
 class RefreshTokenUseCase {
   constructor(
@@ -20,14 +26,15 @@ class RefreshTokenUseCase {
     private dateProvider: IDateProvider
   ) {}
 
-  async execute(token: string): Promise<string> {
+  async execute(token: string): Promise<ITokenResponse> {
     const { email, sub } = verify(token, auth.secret_refresh_token) as IPayload;
     const user_id = sub;
 
-    const userToken = await this.usersTokensRepository.findByUserIdAndRefreshToken(
-      user_id,
-      token
-    );
+    const userToken =
+      await this.usersTokensRepository.findByUserIdAndRefreshToken(
+        user_id,
+        token
+      );
 
     if (!userToken) {
       throw new AppError('Refresh Token does not exists');
@@ -50,7 +57,15 @@ class RefreshTokenUseCase {
       user_id,
     });
 
-    return refresh_token;
+    const newToken = sign({}, auth.secret_token, {
+      subject: user_id,
+      expiresIn: auth.expires_in_token,
+    });
+
+    return {
+      refresh_token,
+      token: newToken,
+    };
   }
 }
 
