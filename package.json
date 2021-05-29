@@ -12,6 +12,7 @@
     "seed:admin": "ts-node-dev src/shared/infra/typeorm/seed/admin.ts"
   },
   "dependencies": {
+    "aws-sdk": "^2.918.0",
     "bcrypt": "^5.0.1",
     "csv-parse": "^4.15.3",
     "dayjs": "^1.10.4",
