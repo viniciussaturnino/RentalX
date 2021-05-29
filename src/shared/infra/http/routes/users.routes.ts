@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { Router } from 'express';
 import multer from 'multer';
 
@@ -9,7 +10,7 @@ import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 
 const userRoutes = Router();
 
-const uploadAvatar = multer(uploadConfig.upload('./tmp/avatar'));
+const uploadAvatar = multer(uploadConfig);
 
 const createUserController = new CreateUserController();
 const updateUserAvatarController = new UpdateUserAvatarController();
